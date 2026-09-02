@@ -3,28 +3,37 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=httpsgithub.comProgrammingHero1ph-tube-resources, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PH Tube</title>
-    <link rel="stylesheet" href="./style.css/">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body>
-
-
-    <nav>
+    <nav class=" flex w-11/12 mx-auto justify-between py-5">
         <div>
-            <img src="./assets/Logo.png" alt="">
+            <img class="w-[150px]" src="./assets/Logo.png" alt="">
         </div>
-        <div class="search">
-         <input type="search" name="" id="">
-
-        </div>
+        <label class="input">
+            <input type="search" required placeholder="Search" />
+            <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                </g>
+            </svg>
+        </label>
         <div class="sort">
-            <button class="btn btn-pramary">sort</button>
+            <button class="btn  btn-primary text-xl ">sort</button>
         </div>
     </nav>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <section>
+        <div class="c">
+
+        </div>
+    </section>
+    <script src="./js/index.js"></script>
 </body>
 
 </html>
