@@ -28,43 +28,46 @@ const loadVideos = () => {
 
 const displayVideo = (videos) => {
     const videoContainer = document.getElementById('video-container');
-
     videos.forEach((video) => {
         console.log(video);
-
         const card = document.createElement('div');
-
         card.innerHTML = `
-        <div class="card bg-base-100 w-96 shadow-sm">
+        <div class="card">
             <figure class="h-[200px]">
-                <img class="w-[full] h-[full] object-cover"
+                <img class="w-full h-full object-cover"
                     src="${video.thumbnail}"
                     alt="Video Thumbnail"
                 />
             </figure>
-
-            <div class="card-body">
-                <h2 class="card-title">
+            <div class="px-0 py-2">
+                <div class="flex gap-3">
+                 <img class="w-8 object-cover h-10 rounded-full" src="${video.authors[0].profile_picture}" alt="">
+                  <h2 class="card-title">
                     ${video.title}
-                </h2>
+                  </h2>
+                
+                 <img class="text-gray-400 w-5 h-5" src="https://img.icons8.com/?size=48&id=SRJUuaAShjVD&format=png" alt="">
+              </div>
 
-                <p>
-                    Video information here
-                </p>
-
-                <div class="card-actions justify-end">
-                    <button class="btn btn-primary">
-                        Watch Now
-                    </button>
-                </div>
+              <div>
+                 <p>
+                 ${video.authors[0].profile_name}
+               </p>
+                <p>${video.others.views}</p>
+               </div>
             </div>
         </div>
         `;
-
         videoContainer.append(card);
     });
 };
 
 loadVideos();
 
-// video End 
+// video End
+//    <div class="">
+//
+//                  <img src="https://img.icons8.com/?size=48&id=SRJUuaAShjVD&format=png" alt="">
+//                 </div>
+//                 <div>
+//                 </div>
