@@ -49,6 +49,19 @@ const loadVideos = () => {
 const displayVideo = (videos) => {
     const videoContainer = document.getElementById('video-container');
     videoContainer.innerHTML=''
+
+    if(videos.length ==0){
+        videoContainer.classList.remove('grid')
+        videoContainer.innerHTML=`
+        <div class="min-h-[300px] flex flex-col gap-4 justify-center items-center">
+          <img src="assets/Icon.png"/>
+          <h2>NO CONTENT HEAR</h2>
+        </div>
+        `
+    } else{
+        videoContainer.classList.add('grid')
+    }
+
     videos.forEach((video) => {
         console.log(video);
         const card = document.createElement('div');
