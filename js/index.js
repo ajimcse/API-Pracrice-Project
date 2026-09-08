@@ -5,11 +5,26 @@ function getTimeString(time) {
 
     return `${hour} Hour ${minit} minit ${second} second ago`;
 }
+const remobeActiveClass=() =>{
+  const button = document.getElementsByClassName('category-btn');
+for(let btn of button){
+  btn.classList.remove('active')
+}
+
+}
 // category videos start
 const loadCategoryVideos = (id) => {
     fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
         .then(res => res.json())
-        .then(data => displayVideo(data.category))
+        .then(data => {
+            // sobai k active class remove koro
+            remobeActiveClass()
+            const activeBtn = document.getElementById(`btn-${id}`)
+            activeBtn.classList.add('active')
+            console.log(activeBtn)
+            displayVideo(data.category);
+
+        })
         .catch(error => console.log(error));
 }
 // button start
@@ -22,17 +37,15 @@ const loadCategroiesButton = () => {
 const displayCategroies = (manuCategories) => {
     const categoriesConatiner = document.getElementById('categories')
     manuCategories.forEach((item) => {
-        console.log(item)
+
         const buttonContainer = document.createElement("div");
         // button.classList = "btn";
         // button.innerText = item.category;
         buttonContainer.innerHTML = `
-        <button onclick="loadCategoryVideos(${item.category_id})" class="btn">
+        <button id="btn-${item.category_id}" onclick="loadCategoryVideos(${item.category_id})" class="btn category-btn">
       ${item.category}
         </button>
         `
-
-
         categoriesConatiner.append(buttonContainer)
     })
 }
@@ -48,22 +61,22 @@ const loadVideos = () => {
 
 const displayVideo = (videos) => {
     const videoContainer = document.getElementById('video-container');
-    videoContainer.innerHTML=''
+    videoContainer.innerHTML = ''
 
-    if(videos.length ==0){
+    if (videos.length == 0) {
         videoContainer.classList.remove('grid')
-        videoContainer.innerHTML=`
+        videoContainer.innerHTML = `
         <div class="min-h-[300px] flex flex-col gap-4 justify-center items-center">
           <img src="assets/Icon.png"/>
           <h2>NO CONTENT HEAR</h2>
         </div>
         `
-    } else{
+    } else {
         videoContainer.classList.add('grid')
     }
 
     videos.forEach((video) => {
-        console.log(video);
+
         const card = document.createElement('div');
         card.innerHTML = `
         <div class="card">
@@ -91,6 +104,11 @@ const displayVideo = (videos) => {
                  ${video.authors[0].profile_name}
                </p>
                 <p>${video.others.views}</p>
+               </div>
+               <div>
+               <p>
+                <button class="btn btn-primary"> Detelis</button>
+               </p>
                </div>
             </div>
         </div>
