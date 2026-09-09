@@ -5,11 +5,11 @@ function getTimeString(time) {
 
     return `${hour} Hour ${minit} minit ${second} second ago`;
 }
-const remobeActiveClass=() =>{
-  const button = document.getElementsByClassName('category-btn');
-for(let btn of button){
-  btn.classList.remove('active')
-}
+const remobeActiveClass = () => {
+    const button = document.getElementsByClassName('category-btn');
+    for (let btn of button) {
+        btn.classList.remove('active')
+    }
 
 }
 // category videos start
@@ -51,6 +51,30 @@ const displayCategroies = (manuCategories) => {
 }
 loadCategroiesButton()
 // button end
+
+
+// detalis start
+
+const loadDetalis = async (videoId) => {
+    console.log(videoId);
+    const url = 'https://openapi.programming-hero.com/api/phero-tube/video/aaac';
+    const res = await fetch(url)
+    const data = await res.json();
+    displayDetalis(data.video);
+
+
+}
+const displayDetalis = (video) => {
+    const datelisContainer = document.getElementById('model-contont')
+    datelisContainer.innerHTML = `
+     <img src="${video.thumbnail}" alt="">
+     <h2 class=" text-2xl font-bold">${video.title}
+     </h2>
+        <p>${video.description}</p>
+   `
+    document.getElementById("showModaldata").click()
+
+}
 //=========== video start
 const loadVideos = () => {
     fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
@@ -107,7 +131,7 @@ const displayVideo = (videos) => {
                </div>
                <div>
                <p>
-                <button class="btn btn-primary"> Detelis</button>
+                <button onclick="loadDetalis('${video.video_id}')" class="btn btn-primary"> Detalis</button>
                </p>
                </div>
             </div>
@@ -118,6 +142,8 @@ const displayVideo = (videos) => {
 };
 
 loadVideos();
+
+
 
 // // {
 //   "status": true,
