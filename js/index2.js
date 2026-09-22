@@ -1,7 +1,35 @@
+// ================================category vabe alada kora
+const loadPetsByCategory = (category) => {
+    fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
+        .then(res => res.json())
+        .then(data => allDisplayData(data.data))
+        .catch(error => console.log(error))
+}
+
+// ================================ Button Category ====================================
 const loadCategoryData = () => {
-    fetch('')
+    fetch('https://openapi.programming-hero.com/api/peddy/categories')
+        .then(res => res.json())
+        .then(data => displayCategory(data.categories))
+        .catch(error => console.log(error))
+}
+const displayCategory = (categories) => {
+  
+    const categoryContainer = document.getElementById('category-button')
+    categories.forEach((btn) => {
+        const button = document.createElement('button');
+
+        button.innerHTML = `
+       <button onclick="loadPetsByCategory('${btn.category}')" class="btn py-6">
+       <img class='w-10 h-10 ' src="${btn.category_icon}" alt="">
+       <span>${btn.category}</span>
+       </button>
+     `
+        categoryContainer.appendChild(button)
+    })
 }
 loadCategoryData()
+
 // =========================================All Data Load Kora=================================
 
 const loadAllData = () => {
@@ -12,8 +40,9 @@ const loadAllData = () => {
 }
 // ================================== Data Display Kore Dekhano================================
 const allDisplayData = (datas) => {
-    console.log(datas)
+
     const petCardContainer = document.getElementById('card-container')
+    petCardContainer.innerHTML="";
     datas.forEach((pet) => {
         const card = document.createElement('div')
         card.innerHTML = `
