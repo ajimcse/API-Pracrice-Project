@@ -1,0 +1,4 @@
+const lodaCategoryData = () => {
+   fetch('')
+}
+lodaCategoryData()
