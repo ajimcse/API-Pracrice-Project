@@ -14,7 +14,7 @@ const loadCategoryData = () => {
         .catch(error => console.log(error))
 }
 const displayCategory = (categories) => {
-  
+
     const categoryContainer = document.getElementById('category-button')
     categories.forEach((btn) => {
         const button = document.createElement('button');
@@ -41,8 +41,39 @@ const loadAllData = () => {
 // ================================== Data Display Kore Dekhano================================
 const allDisplayData = (datas) => {
 
-    const petCardContainer = document.getElementById('card-container')
-    petCardContainer.innerHTML="";
+    const petCardContainer = document.getElementById('card-container');
+
+    petCardContainer.innerHTML = "";
+
+    if (datas.length == 0) {
+        petCardContainer.classList.remove(
+            'grid',
+            'grid-cols-1',
+            'md:grid-cols-3',
+            'gap-5');
+        petCardContainer.innerHTML = `
+        <div class="w-full min-h-[400px] flex flex-col items-center justify-center text-center">
+
+            <img 
+                src="./images2/error.webp" 
+                alt="No information"
+                class="w-40"
+            >
+
+            <h2 class="text-2xl font-bold mt-4">
+                No Information Available
+            </h2>
+
+            <p class="max-w-xl mt-2">
+                It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+                The point of using Lorem Ipsum is that it has a.
+            </p>
+
+        </div>
+    `;
+    }
+
     datas.forEach((pet) => {
         const card = document.createElement('div')
         card.innerHTML = `
@@ -85,7 +116,7 @@ const allDisplayData = (datas) => {
                     <button class="btn ">
                        Adopt
                     </button>
-                    <button class="btn  ">
+                    <button id="details-btn" class="btn  ">
                         Details
                     </button>
                    </div>
@@ -93,6 +124,11 @@ const allDisplayData = (datas) => {
                 </div>
             </div>
          `
+        petCardContainer.classList.add(
+            'grid',
+            'grid-cols-1',
+            'md:grid-cols-3',
+            'gap-5');
         petCardContainer.appendChild(card)
 
     })
