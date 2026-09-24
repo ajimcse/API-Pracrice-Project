@@ -17,15 +17,20 @@ const displayCategory = (categories) => {
 
     const categoryContainer = document.getElementById('category-button')
     categories.forEach((btn) => {
-        const button = document.createElement('button');
+       const button = document.createElement('button');
 
-        button.innerHTML = `
-       <button onclick="loadPetsByCategory('${btn.category}')" class="btn py-6">
-       <img class='w-10 h-10 ' src="${btn.category_icon}" alt="">
-       <span>${btn.category}</span>
-       </button>
-     `
-        categoryContainer.appendChild(button)
+button.innerHTML = `
+    <img class="w-10 h-10" src="${btn.category_icon}" alt="">
+    <span>${btn.category}</span>
+`;
+
+button.className = "btn py-6";
+
+button.onclick = () => {
+    loadPetsByCategory(btn.category);
+};
+
+categoryContainer.appendChild(button);
     })
 }
 loadCategoryData()
@@ -110,9 +115,12 @@ const allDisplayData = (datas) => {
                     </p>
                     <hr class="border-gray-200">  
                    <div class="flex justify-between">
-                    <button class="btn ">
-                       <i class="fa-solid fa-thumbs-up"></i>
-                    </button>
+                  <button 
+                  onclick="addToLikedPets('${pet.image}', '${pet.pet_name}')"
+                  class="btn"
+                            > 
+                    <i class="fa-solid fa-thumbs-up"></i> 
+                  </button>
                     <button class="btn ">
                        Adopt
                     </button>
@@ -136,5 +144,29 @@ const allDisplayData = (datas) => {
 loadAllData()
 
 //=================================== All Data Dispaly End =======================================
+// ================================================click
+
+
+const addToLikedPets = (image, name) => {
+    const likedPets = document.getElementById('liked-pets');
+
+    const divcar = document.createElement('div');
+
+    divcar.innerHTML = `
+       <div class="w-40"> 
+    <img  
+        src="${image}"  
+        alt="${name}"  
+        class="w-full h-32 object-cover rounded-lg" 
+    >
+
+    <h3 class="font-bold mt-2 text-center">
+        ${name}
+    </h3>
+</div>
+    `;
+
+    likedPets.appendChild(divcar);
+}
 
 
