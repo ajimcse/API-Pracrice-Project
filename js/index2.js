@@ -15,23 +15,44 @@ const loadCategoryData = () => {
 }
 const displayCategory = (categories) => {
 
-    const categoryContainer = document.getElementById('category-button')
-    categories.forEach((btn) => {
-       const button = document.createElement('button');
+   const categoryContainer = document.getElementById('category-button');
 
-button.innerHTML = `
-    <img class="w-10 h-10" src="${btn.category_icon}" alt="">
-    <span>${btn.category}</span>
-`;
+categories.forEach((btn) => {
 
-button.className = "btn py-6";
+    const button = document.createElement('button');
 
-button.onclick = () => {
-    loadPetsByCategory(btn.category);
-};
+    button.innerHTML = `
+        <img 
+            class="w-10 h-10"
+            src="${btn.category_icon}"
+            alt="${btn.category}"
+        >
 
-categoryContainer.appendChild(button);
-    })
+        <span>
+            ${btn.category}
+        </span>
+    `;
+
+    button.className = "btn py-6";
+
+    button.onclick = () => {
+       // আগের active button সরাবে
+        const allButtons = categoryContainer.querySelectorAll('button');
+
+        allButtons.forEach((btn) => {
+            btn.classList.remove('bg-blue-200', 'text-white');
+        });
+
+        // যেটাতে click করেছি সেটাকে active করবে
+        button.classList.add('bg-blue-200', 'text-white');
+
+        // Category অনুযায়ী data load
+        loadPetsByCategory(btn.category);
+    };
+
+    categoryContainer.appendChild(button);
+});
+    
 }
 loadCategoryData()
 
@@ -155,7 +176,7 @@ const addToLikedPets = (image, name) => {
     divcar.innerHTML = `
        <div class="w-40"> 
     <img  
-        src="${image}"  
+        src="${image}"
         alt="${name}"  
         class="w-full h-32 object-cover rounded-lg" 
     >
